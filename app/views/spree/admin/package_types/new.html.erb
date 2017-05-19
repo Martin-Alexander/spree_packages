@@ -1,0 +1,25 @@
+<% content_for :page_title do %>
+  <%= link_to "Package", admin_package_types_path %> /
+  <%= Spree.t(:new_package) %>
+<% end %>
+
+<%= form_tag("/admin/package_types", method: :post) do %>
+	<%= field_set_tag nil, class: "form-group" do %>
+		<%= label_tag "name", "Package Name" %> <span class="required">*</span>
+		<%= text_field_tag "name", nil, class: 'form-control title' %>
+	<% end %>
+
+	<%= field_set_tag nil, class: "form-group" do %>
+		<%= label_tag "taxons", "Taxons" %> <span class="required">*</span>
+		<%= select_tag "taxons", options_from_collection_for_select(@taxons, "id", "name"), multiple: true, id: "select-multiple-taxons", class: "form-control title" %>
+	<% end %>
+  <%= render partial: 'spree/admin/shared/new_resource_links' %>
+<% end %>
+
+
+<style>
+	#select-multiple-taxons {
+		height: 200px;
+		width: 100px;
+	}
+</style>
