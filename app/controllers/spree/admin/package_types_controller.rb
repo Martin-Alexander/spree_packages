@@ -14,7 +14,11 @@ module Spree
 			end
 
 			def create
-				PackageType.create(name: params[:name])
+				package_type = PackageType.create(name: params[:name])
+				taxons = params[:taxons]
+				taxons.each do |taxon_id|
+					PackageTypeTaxon.create(package_type: package_type, taxon: Taxon.find(taxon_id))
+				end
 				redirect_to admin_package_types_path
 			end
 
@@ -26,7 +30,7 @@ module Spree
 
 			def destroy
 				PackageType.find(params[:id]).destroy
-				redirect_to index
+				redirect_to admin_package_types_path
 			end
 
 		end

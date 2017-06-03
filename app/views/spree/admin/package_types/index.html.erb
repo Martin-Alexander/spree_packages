@@ -13,6 +13,7 @@
         <th><%= Spree.t(:status) %></th>
         <th><%= "Package Name" %></th>
         <th class="text-center"><%= "No. of Items Incl." %></th>
+        <th class="text-center"><%= "No. of Packages Made" %></th>
         <th data-hook="admin_products_index_header_actions" class="text-center"></th>
       </tr>
     </thead>
@@ -22,6 +23,7 @@
             <td class="status"><%# available_status(package_type) %> </td>
             <td><%= link_to package_type.try(:name), admin_package_type_path(package_type) %></td>
             <td class="text-center"><%= package_type.package_type_taxons.count rescue '' %></td>
+            <td class="text-center"><%= package_type.packages.count rescue '' %></td>
             <td class="actions actions-3 text-right" data-hook="admin_products_index_row_actions">
               <%= link_to_edit package_type, no_text: true, class: 'edit' if can?(:edit, package_type) %>
               <%# link_to_clone package_type, no_text: true, class: 'clone' if can?(:clone, package_type) %>
